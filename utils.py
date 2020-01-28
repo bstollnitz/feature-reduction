@@ -6,10 +6,10 @@ from urllib.request import urlopen
 
 import numpy as np
 
-DATA_FOLDER = "data"
+DATA_FOLDER = 'data'
+PLOTS_FOLDER = 'plots'
 
-
-def find_or_create_dir(dir_name: str) -> str:
+def _find_or_create_dir(dir_name: str) -> str:
     """
     Creates a directory if it doesn't exist.
     """
@@ -25,6 +25,14 @@ def find_or_create_dir(dir_name: str) -> str:
     return dir_path
 
 
+def find_or_create_plots() -> str:
+    """
+    Creates a 'plots' directory if it doesn't exist.
+    """
+
+    return _find_or_create_dir(PLOTS_FOLDER)
+
+
 def download_remote_data_file(data_url: str) -> str:
     """
     Gets the data from url if it's not saved locally yet.
@@ -32,18 +40,17 @@ def download_remote_data_file(data_url: str) -> str:
     """
     
     # Create a data directory if it doesn't exist.
-    data_dir_path = find_or_create_dir(DATA_FOLDER)
+    data_dir_path = _find_or_create_dir(DATA_FOLDER)
     
     # Download the data file if it doesn't exist.
     filename = os.path.basename(urlparse(data_url).path)
     data_file_path = os.path.join(data_dir_path, filename)
-    print(f"data_file_path: {data_file_path}")
     if not os.path.exists(data_file_path):
-        print("Downloading data file...")
+        print(f'Downloading data file {data_file_path}...')
         with urlopen(data_url) as response:
             with open(data_file_path, "wb") as data_file:
                 shutil.copyfileobj(response, data_file)
-        print("Done downloading data file.")
+        print('Done downloading data file.')
 
     return data_file_path
 
