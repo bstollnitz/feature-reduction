@@ -6,14 +6,24 @@ from urllib.request import urlopen
 
 import numpy as np
 
+import utils_video
+
+
 DATA_FOLDER = 'data'
 PLOTS_FOLDER = 'plots'
+VIDEOS_FOLDER = 'videos'
+
 
 def _find_or_create_dir(dir_name: str) -> str:
-    """
-    Creates a directory if it doesn't exist.
-    """
+    """Creates a directory if it doesn't exist.
 
+    Args:
+        dir_name (str): The name of the directory to create if it doesn't
+        exist.
+
+    Returns:
+        The local path of the directory.
+    """
     # Get the directory of the current file.
     parent_dir_path = os.path.dirname(os.path.realpath(__file__))
     
@@ -25,20 +35,24 @@ def _find_or_create_dir(dir_name: str) -> str:
     return dir_path
 
 
-def find_or_create_plots() -> str:
-    """
-    Creates a 'plots' directory if it doesn't exist.
-    """
+def create_plots() -> str:
+    """Creates a directory to hold plots if it doesn't exist.
 
+    Returns:
+        The local path of the directory.
+    """
     return _find_or_create_dir(PLOTS_FOLDER)
 
 
 def download_remote_data_file(data_url: str) -> str:
-    """
-    Gets the data from url if it's not saved locally yet.
-    Returns the path to the local file.
-    """
+    """Downloads data from url if it's not saved locally yet.
+
+    Args:
+        data_url (str): The url of the data file we want to download.
     
+    Returns:
+        The path to the local file.
+    """
     # Create a data directory if it doesn't exist.
     data_dir_path = _find_or_create_dir(DATA_FOLDER)
     
@@ -55,10 +69,22 @@ def download_remote_data_file(data_url: str) -> str:
     return data_file_path
 
 
-def normalize(my_array: np.ndarray) -> np.ndarray:
-    """
-    Normalizes an ndarray.
-    """
+def save_video(video: np.ndarray, video_name: str) -> str:
+    """Creates a folder to hold videos if it doesn't exist yet, and saves
+    the video.
 
-    return np.abs(my_array)/np.max(np.abs(my_array))
+    Args: 
+        video (np.ndarray): The video to save.
+    
+    Returns:
+        The path to the video.
+    """
+    # Create a video directory if it doesn't exist.
+    video_dir_path = _find_or_create_dir(VIDEOS_FOLDER)
+    video_path = os.path.join(video_dir_path, video_name)
 
+    # Save the video to that directory if it's not there already.
+    if not os.path.exists(video_path):
+        utils_video.save_video(video_path, video)
+
+    return video_path
