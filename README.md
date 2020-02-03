@@ -1,4 +1,4 @@
-# Gabor transforms
+# Feature reduction
 
 *Technologies:* Python, NumPy, Plotly, OpenCV, CSRT. <br>
 *Topics:* PCA, SVD, dimensionality reduction, object tracking, time-series. <br>
