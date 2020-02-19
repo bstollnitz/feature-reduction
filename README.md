@@ -1,7 +1,8 @@
 # Feature reduction
 
-*Technologies:* Python, NumPy, Plotly, OpenCV, CSRT. <br>
-*Topics:* PCA, SVD, dimensionality reduction, object tracking, time-series. <br>
+*Technologies:* Python, NumPy, Plotly, OpenCV, CSRT object tracker. <br>
+*Topics:* principal component analysis (PCA), dimensionality reduction, object tracking, 
+time-series. <br>
 
 ## Description
 
