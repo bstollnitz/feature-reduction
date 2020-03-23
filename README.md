@@ -27,8 +27,15 @@ of my masters in Applied Mathematics.
 
 To run this project:
 
+(Windows)
 ```sh
-conda env create -f environment.yml
+conda env create -f environment_win.yml
 conda activate feature-reduction
 python main.py
 ```
+
+(Mac)
+```sh
+conda env create -f environment_mac.yml
+conda activate feature-reduction
+python main.py
